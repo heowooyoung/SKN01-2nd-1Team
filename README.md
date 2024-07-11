@@ -1,4 +1,4 @@
-![image](https://github.com/heowooyoung/SKN01-2nd-1Team/assets/120430842/0b47c050-99ae-4d63-ae9b-31f058d055fb)# SKN01-2nd-1Team
+# SKN01-2nd-1Team
 Vue + Django + FastAPI 기반 가입 고객 이탈 예측 및 구매 동향 예측
 
 SK 네트웍스 Family AI 캠프 과정 2차 단위 프로젝트
