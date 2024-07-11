@@ -1,39 +1,77 @@
 import { ActionContext } from "vuex"
-import { OrderItem, OrderState } from "./states"
+import { FoodorderItem, DrinkorderItem, OrderState, PurchaseData } from "./states"
 import { AxiosResponse } from "axios"
 import axiosInst from "@/utility/axiosInstance"
+import { SET_PURCHASE_DATA } from "./mutation-types"
 
 export type OrderActions = {
-    requestCreateOrderToDjango(
+    requestCreateFoodorderToDjango(
         context: ActionContext<OrderState, any>,
         payload: {
             userToken: string;
             items: {
-                cartItemId: number;
-                quantity: number;
-                orderPrice: number;
-                size: number;
+                foodcartItemId: number;
+                foodquantity: number;
+                foodorderPrice: number
             }[]
         }
     ): Promise<AxiosResponse>;
 
-    requestReadOrderToDjango(
+    requestCreateDrinkorderToDjango(
         context: ActionContext<OrderState, any>,
         payload: {
-            orderId: string
+            userToken: string;
+            items: {
+                drinkcartItemId: number;
+                drinkquantity: number;
+                drinkorderPrice: number
+            }[]
         }
-    ): Promise<AxiosResponse>
+    ): Promise<AxiosResponse>;
 
-    requestOrderListToDjango(
+    requestCreatePurchaseToDjango(
         context: ActionContext<OrderState, any>,
         payload: {
-            page: number
+            userToken: string;
+            foodorderItems: {
+                foodcartItemId: number;
+                foodquantity: number;
+                foodorderPrice: number;
+            }[];
+            drinkorderItems: {
+                drinkcartItemId: number;
+                drinkquantity: number;
+                drinkorderPrice: number;
+            }[];
         }
-    ): Promise<AxiosResponse>
+    ): Promise<AxiosResponse>;
+
+    requestReadFoodorderToDjango(
+        context: ActionContext<OrderState, any>,
+        payload: {
+            foodorderId: string
+        }
+    ): Promise<AxiosResponse>;
+
+    requestReadDrinkorderToDjango(
+        context: ActionContext<OrderState, any>,
+        payload: {
+            drinkorderId: string
+        }
+    ): Promise<AxiosResponse>;
+
+    requestReadPurchaseToDjango(
+        context: ActionContext<OrderState, any>,
+        payload: {
+            purchaseId: string
+        }
+    ): Promise<AxiosResponse<PurchaseData>>;
 }
 
+
 const actions: OrderActions = {
-async requestCreateOrderToDjango({ state }, payload) {
+    async requestCreateFoodorderToDjango({ state }, payload) {
+
         try {
             const userToken = localStorage.getItem('userToken');
             if (!userToken) {
@@ -41,50 +79,101 @@ async requestCreateOrderToDjango({ state }, payload) {
             }
 
             console.log('payload:', payload);
+            console.log('userToken:', userToken)
 
             const requestData = {
                 userToken,
-                items: payload.items.map(item => {
-                    console.log('cartItemId:', item.cartItemId);
-                    console.log('quantity:', item.quantity);
-                    console.log('orderPrice:', item.orderPrice);
-                    console.log('size:', item.size);
-                    return {
-                        cartItemId: item.cartItemId,
-                        quantity: item.quantity,
-                        orderPrice: item.orderPrice,
-                        size: item.size
-                    };
-                })
+                items: payload.items.map(item => ({
+                    foodcartItemId: item.foodcartItemId,
+                    foodquantity: item.foodquantity,
+                    foodorderPrice: item.foodorderPrice
+                }))
             };
+            console.log('requestData:', requestData)
 
             const response =
-                await axiosInst.djangoAxiosInst.post('/orders/create', requestData);
-            console.log('response data:', response.data);
+                await axiosInst.djangoAxiosInst.post('/foodorders/create', requestData);
+            console.log('response data:', response.data)
 
             return response.data;
         } catch (error) {
-            console.error('Error creating order:', error);
+            console.error('Error creating foodorder:', error);
             throw error;
         }
     },
 
-    async requestReadOrderToDjango({ state }, payload) {
+    async requestCreateDrinkorderToDjango({ state }, payload) {
         try {
             const userToken = localStorage.getItem('userToken');
             if (!userToken) {
                 throw new Error('User token not found');
             }
 
-            const { orderId } = payload
+            console.log('payload:', payload)
 
             const requestData = {
                 userToken,
+                items: payload.items.map(item => ({
+                    drinkcartItemId: item.drinkcartItemId,
+                    drinkquantity: item.drinkquantity,
+                    drinkorderPrice: item.drinkorderPrice
+                }))
+            };
+
+            const response =
+                await axiosInst.djangoAxiosInst.post('/drinkorders/create', requestData);
+            console.log('response data:', response.data)
+
+            return response.data;
+        } catch (error) {
+            console.error('Error creating drinkorder:', error);
+            throw error;
+        }
+    },
+    async requestCreatePurchaseToDjango({ state }, payload) {
+        try {
+            const userToken = localStorage.getItem('userToken');
+            if (!userToken) {
+                throw new Error('User token not found');
+            }
+
+            console.log('payload:', payload)
+
+            const requestData = {
+                userToken,
+                drinkorderItems: payload.drinkorderItems,
+                foodorderItems: payload.foodorderItems,
+            };
+            
+            console.log('requestData:', requestData)
+
+            const response =
+                await axiosInst.djangoAxiosInst.post('/purchase/create', requestData);
+            console.log('response data:', response.data)
+
+            return response.data.purchaseId;
+        } catch (error) {
+            console.error('Error creating purchase:', error);
+            throw error;
+        }
+    },
+
+    async requestReadFoodorderToDjango({ state }, payload) {
+        try {
+            const userToken = localStorage.getItem('userToken');
+            if (!userToken) {
+                throw new Error('User token not found');
+            }
+
+            const { foodorderId } = payload
+
+            const requestData = {
+                userToken,
+                payload
             }
 
             const response =
-                await axiosInst.djangoAxiosInst.post(`/orders/read/${orderId}`, requestData)
-            console.log('data:', response.data)
+                await axiosInst.djangoAxiosInst.post(`/orders/read/${foodorderId}`, requestData)
 
             return response.data
         } catch (error) {
@@ -93,36 +182,55 @@ async requestCreateOrderToDjango({ state }, payload) {
         }
     },
 
-    async requestOrderListToDjango(
-        context: ActionContext<OrderState, any>,
-        payload: {
-            page: number
-        }
-    ): Promise<AxiosResponse> {
+    async requestReadDrinkorderToDjango({ state }, payload) {
         try {
             const userToken = localStorage.getItem('userToken');
             if (!userToken) {
                 throw new Error('User token not found');
             }
 
-            const { page } = payload
+            const { drinkorderId } = payload
 
-            const response = await axiosInst.djangoAxiosInst.post('/orders/list', {
-                userToken, page
-            })
+            const requestData = {
+                userToken,
+            }
 
-            console.log('response:', response.data)
+            const response =
+                await axiosInst.djangoAxiosInst.post(`/orders/read/${drinkorderId}`, requestData)
 
-            context.commit('REQUEST_ORDER_LIST_TO_DJANGO', response.data.orders)
-            context.commit('SET_CURRENT_PAGE_NUMBER', response.data.currentPageNumber)
-            context.commit('SET_TOTAL_PAGE_NUMBER', response.data.totalPageNumber)
-
-            return response
+            return response.data
         } catch (error) {
-            console.error('주문 리스트 화보 중 에러 발생:', error)
+            console.error('주문 내역 요청 중 에러:', error)
             throw error
         }
-    }
+    },
+    async requestReadPurchaseToDjango({ state }, payload) {
+        try {
+            const userToken = localStorage.getItem('userToken');
+            if (!userToken) {
+                throw new Error('User token not found');
+            }
+
+            const { purchaseId } = payload
+            console.log("purchaseId: ", purchaseId)
+
+            const requestData = {
+                userToken,
+            }
+
+            const response =
+                await axiosInst.djangoAxiosInst.post(`/purchase/read/${purchaseId}`, requestData)
+            
+            console.log("response: ", response)
+            console.log("response.data: ", response.data)
+            
+            // commit(SET_PURCHASE_DATA, response.data)
+            return response.data
+        } catch (error) {
+            console.error('주문 내역 요청 중 에러:', error)
+            throw error
+        }
+    },
 };
 
 export default actions;

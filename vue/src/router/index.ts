@@ -1,38 +1,43 @@
-import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router'
+import { createRouter, createWebHistory, RouteRecordRaw } from "vue-router";
 
-import HomeRoutes from '@/home/router/HomeRoutes'
-import ReviewRoutes from '@/review/router/ReviewRoutes'
-import AccountRoutes from '@/account/router/AccountRoutes'
-import AuthenticationRoutes from '@/authentication/router/AuthenticationRoutes'
-import ProductRoutes from '@/product/router/ProductRoutes'
-import CartRoutes from "@/cart/router/CartRoutes"
+import HomeRoutes from "@/home/router/HomeRoutes";
+// import BoardRoutes from '@/board/router/BoardRoutes'
+import MovieRoutes from "@/movie/router/MovieRoutes";
+import AccountRoutes from "@/account/router/AccountRoutes";
+import DrinkRoutes from "@/drink/router/DrinkRoutes";
+import FoodRoutes from "@/food/router/FoodRoutes";
+import AuthenticationRoutes from "@/authentication/router/AuthenticationRoutes";
+import CartRoutes from "@/cart/router/CartRoutes";
+import SubscriptionRoutes from "@/subscription/router/SubscriptionRoutes";
+import OrderRoutes from "@/order/router/OrderRoutes";
+import AdminDashBoardRoutes from "@/admin/router/AdminDashBoardRoutes";
+import KmeansRoutes from "@/kmeans/router/KmeansRoutes";
+import LogisticRegressionRoutes from "@/logisticRegression/router/LogisticRegressionRoutes";
 
-import OrderRoutes from '@/order/router/OrderRoutes'
-import CommunityRoutes from '@/community/router/CommunityRoutes'
-import ReportRoutes from '@/report/router/ReportRoutes'
 
-
-
-import D3PlotRoutes from '@/d3plot/router/D3PlotRoutes'
-
+// import AuthenticationRoutes from '@/authentication/router/AuthenticationRoutes'
 
 const routes: Array<RouteRecordRaw> = [
-  ...HomeRoutes,
-  ...ReviewRoutes,
-  ...AccountRoutes,
-  ...AuthenticationRoutes,
-  ...ProductRoutes,
-  ...CommunityRoutes,
-  ...CartRoutes,  ...OrderRoutes,
-  ...ReportRoutes,  
- ...D3PlotRoutes,
-]
+    ...HomeRoutes,
+    // ...BoardRoutes,
+    ...MovieRoutes,
+    ...AccountRoutes,
+    ...AuthenticationRoutes,
+    ...DrinkRoutes,
+    ...FoodRoutes,
+    ...CartRoutes,
+    // ...AuthenticationRoutes,
+    ...SubscriptionRoutes,
+    ...OrderRoutes,
+    ...AdminDashBoardRoutes,
+    ...KmeansRoutes,
+    ...LogisticRegressionRoutes,
 
-  
-
+];
 
 const router = createRouter({
-  history: createWebHistory(process.env.BASE_URL),
-  routes
-})
-export default router
+    history: createWebHistory(process.env.BASE_URL),
+    routes,
+});
+
+export default router;

@@ -1,202 +1,277 @@
 <template>
-  <v-container>
-    <v-row v-if="!isAuthenticated">
-      <v-col cols="12">
-        <v-card outlined class="mb-6 pa-4">
-          <h2 class="text-h6 orange--text">멤버에게 제공되는 무료 배송 서비스</h2>
-          <p class="text-body-2 mb-0">
-            IT,SHOE 멤버가 되어 무료배송 서비스를 비롯한 다양한 혜택을 누려보세요.
-            <a href="#" class="font-weight-bold" @click.prevent="goToRegister"
-              >가입하기</a
-            >
-            또는
-            <a href="#" class="font-weight-bold" @click.prevent="goToLogin">로그인</a>
-          </p>
-        </v-card>
-      </v-col>
-    </v-row>
-
-    <v-row>
-      <v-col cols="12" md="8">
-        <v-card v-for="item in cartItems" :key="item.cartItemId" class="mb-6" outlined>
-          <v-row no-gutters>
-            <v-col cols="4">
-              <v-img :src="getProductImage(item.productName)" contain></v-img>
+    <v-container>
+        <v-row>
+            <v-col cols="12">
+                <v-card>
+                    <v-card-title>Shopping Foodcart</v-card-title>
+                    <v-card-text>
+                        <v-table>
+                            <thead>
+                            <tr>
+                                <th>Select</th>
+                                <th>Food</th>
+                                <th>Price</th>
+                                <th>Quantity</th>
+                                <th>Total</th>
+                                <th>Actions</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr v-for="item in foodcartItems" :key="item.foodcartItemId">
+                                <td>
+                                    <v-checkbox v-model="selectedFoodItems" :value="item"></v-checkbox>
+                                </td>
+                                <td>{{ item.foodName }}</td>
+                                <td>{{ item.foodPrice }}</td>
+                                <td>
+                                    <v-text-field
+                                        v-model="item.foodquantity"
+                                        type="number"
+                                        min="1"
+                                        @change="updateQuantity(item)"
+                                    ></v-text-field>
+                                </td>
+                                <td>{{ item.foodPrice * item.foodquantity }}</td>
+                                <td>
+                                    <v-btn color="red" @click="removeItem(item)">Remove</v-btn>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </v-table>
+                        <v-divider></v-divider>
+                        <v-row>
+                            <v-col class="text-right">
+                                <strong>Total: {{ selectedFoodItemsTotal }}</strong>
+                            </v-col>
+                        </v-row>
+                    </v-card-text>
+               
+                    <v-card-title>Shopping Drinkcart</v-card-title>
+                    <v-card-text>
+                        <v-table>
+                            <thead>
+                            <tr>
+                                <th>Select</th>
+                                <th>Drink</th>
+                                <th>Price</th>
+                                <th>Quantity</th>
+                                <th>Total</th>
+                                <th>Actions</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr v-for="item in drinkcartItems" :key="item.drinkcartItemId">
+                                <td>
+                                    <v-checkbox v-model="selectedDrinkItems" :value="item"></v-checkbox>
+                                </td>
+                                <td>{{ item.drinkName }}</td>
+                                <td>{{ item.drinkPrice }}</td>
+                                <td>
+                                    <v-text-field
+                                        v-model="item.drinkquantity"
+                                        type="number"
+                                        min="1"
+                                        @change="updateQuantity(item)"
+                                    ></v-text-field>
+                                </td>
+                                <td>{{ item.drinkPrice * item.drinkquantity }}</td>
+                                <td>
+                                    <v-btn color="red" @click="removeItem(item)">Remove</v-btn>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </v-table>
+                        <v-divider></v-divider>
+                        <v-row>
+                            <v-col class="text-right">
+                                <strong>Total: {{ selectedDrinkItemsTotal }}</strong>
+                            </v-col> 
+                        </v-row>
+                        <v-row>
+                            <v-col class="text-right">
+                                    <strong>Real_Total: {{ selectedItemsTotal }}</strong>
+                            </v-col> 
+                            <v-col>
+                                <v-btn color="blue" @click="confirmCheckout">Checkout</v-btn>
+                            </v-col>
+                        </v-row>
+                    </v-card-text>             
+                </v-card>
             </v-col>
-            <v-col cols="8" class="pa-4">
-              <div class="d-flex justify-space-between align-start">
-                <div>
-                  <h4 class="text-h6">{{ item.productName }}</h4>
-                  <p class="text-body-2 grey--text">{{ item.productDescription }}</p>
-                  <p class="text-body-2">{{ item.productColor }}</p>
-                  <p class="text-body-2">사이즈: {{ item.productSize }}</p>
-                </div>
-                <div class="text-right">
-                  <p class="text-h6">{{ item.productPrice.toLocaleString() }} 원</p>
-                </div>
-              </div>
-              <div class="d-flex justify-space-between align-center mt-4">
-                <v-select
-                  v-model="item.quantity"
-                  :items="[1, 2, 3, 4, 5, 6, 7, 8, 9, 10]"
-                  label="수량"
-                  dense
-                  outlined
-                  hide-details
-                  class="flex-grow-0"
-                  style="max-width: 100px"
-                ></v-select>
-                <div>
-                  <v-btn icon small class="mr-2">
-                    <v-icon>mdi-heart-outline</v-icon>
-                  </v-btn>
-                  <v-btn icon small @click="removeItem(item)">
-                    <v-icon>mdi-delete</v-icon>
-                  </v-btn>
-                </div>
-              </div>
-            </v-col>
-          </v-row>
-        </v-card>
-
-        <v-card outlined class="pa-4 mb-4">
-          <h4 class="text-h6 mb-2">무료 배송</h4>
-          <p class="text-body-2 mb-0">도착 예정일: {{ deliveryDate }}</p>
-        </v-card>
-      </v-col>
-
-      <v-col cols="12" md="4">
-        <v-card outlined class="pa-4">
-          <h3 class="text-h6 mb-4">주문 내역</h3>
-
-          <div class="d-flex justify-space-between mb-2">
-            <span>상품 금액</span>
-            <span>{{ cartTotal.toLocaleString() }} 원</span>
-          </div>
-          <div class="d-flex justify-space-between mb-2">
-            <span>배송비</span>
-            <span v-if="!isAuthenticated">{{ deliveryPrice }} 원</span>
-            <span v-if="isAuthenticated">무료</span>
-          </div>
-          <div class="d-flex justify-space-between text-h6 font-weight-bold mt-4">
-            <span>총 결제 금액</span>
-            <span v-if="!isAuthenticated">{{ totalPayment.toLocaleString() }} 원</span>
-            <span v-if="isAuthenticated">{{ cartTotal.toLocaleString() }} 원</span>
-          </div>
-
-          <v-btn color="black" dark block x-large class="mt-6" @click="confirmCheckout">
-            주문결제
-          </v-btn>
-        </v-card>
-      </v-col>
-    </v-row>
-
-    <v-dialog v-model="isCheckoutDialogVisible" max-width="500">
-      <v-card>
-        <v-card-title>주문 확인</v-card-title>
-        <v-card-text> 선택한 상품을 주문하시겠습니까? </v-card-text>
-        <v-card-actions>
-          <v-spacer></v-spacer>
-          <v-btn color="blue darken-1" text @click="isCheckoutDialogVisible = false"
-            >취소</v-btn
-          >
-          <v-btn color="blue darken-1" text @click="proceedToOrder">확인</v-btn>
-        </v-card-actions>
-      </v-card>
-    </v-dialog>
-  </v-container>
+        </v-row>
+        <!-- Confirmation Dialog -->
+        <v-dialog v-model="isCheckoutDialogVisible" max-width="500">
+            <v-card>
+                <v-card-title>Confirm Checkout</v-card-title>
+                <v-card-text>Are you sure you want to order the selected items?</v-card-text>
+                <v-card-actions>
+                    <v-spacer></v-spacer>
+                    <v-btn color="blue darken-1" text @click="isCheckoutDialogVisible = false">Cancel</v-btn>
+                    <v-btn color="blue darken-1" text @click="proceedToOrder">Confirm</v-btn>
+                </v-card-actions>
+            </v-card>
+        </v-dialog>
+    </v-container>
 </template>
 
 <script>
-import { mapActions, mapState } from "vuex";
-const authenticationModule = "authenticationModule";
+import { mapActions } from "vuex";
+
+const cartModule = 'cartModule'
+const orderModule = 'orderModule'
+
+import router from "@/router"; // Assuming you have a router set up
 
 export default {
-  data() {
-    return {
-      cartItems: [],
-      isCheckoutDialogVisible: false,
-      deliveryPrice: 3000,
-    };
-  },
-  computed: {
-    ...mapState(authenticationModule, ["isAuthenticated"]),
-    cartTotal() {
-      return this.cartItems.reduce(
-        (total, item) => total + item.productPrice * item.quantity,
-        0
-      );
+    data() {
+        return {
+            foodcartItems: [],
+            drinkcartItems: [],
+            selectedFoodItems: [],
+            selectedDrinkItems: [],
+            selectedItems: [],
+            isCheckoutDialogVisible: false,
+        };
     },
-    totalPayment() {
-      return this.cartTotal + this.deliveryPrice;
+    computed: {
+        foodcartTotal() {
+            if (!Array.isArray(this.foodcartItems) || this.foodcartItems.length === 0) {
+                return 0;
+            }
+            return this.foodcartItems.reduce(
+                (total, food) => total + food.foodPrice * food.foodquantity,
+                0
+            );
+        },
+        drinkcartTotal() {
+            if (!Array.isArray(this.drinkcartItems) || this.drinkcartItems.length === 0) {
+                return 0;
+            }
+            return this.drinkcartItems.reduce(
+                (total, drink) => total + drink.drinkPrice * drink.drinkquantity,
+                0
+            );
+        },
+        selectedFoodItemsTotal() {
+            if (!Array.isArray(this.selectedFoodItems) || this.selectedFoodItems.length === 0) {
+                return 0;
+            }
+            return this.selectedFoodItems.reduce(
+                (total, food) => total + food.foodPrice * food.foodquantity ,
+                0
+            );
+        },
+        selectedDrinkItemsTotal() {
+            if (!Array.isArray(this.selectedDrinkItems) || this.selectedDrinkItems.length === 0) {
+                return 0;
+            }
+            return this.selectedDrinkItems.reduce(
+                (total, drink) => total + drink.drinkPrice * drink.drinkquantity ,
+                0
+            );
+        },
+        selectedItemsTotal(){
+            return(
+                this.selectedFoodItemsTotal + this.selectedDrinkItemsTotal          
+            );
+        }
     },
-    deliveryDate() {
-      const today = new Date();
-      const deliveryDate = new Date(today.setDate(today.getDate() + 2));
-      return deliveryDate.toLocaleDateString("ko-KR", {
-        month: "long",
-        day: "numeric",
-        weekday: "short",
-      });
+    methods: {
+        ...mapActions("cartModule", ["requestFoodcartListToDjango"]),
+        ...mapActions("cartModule", ["requestDrinkcartListToDjango"]),
+        ...mapActions("orderModule", ["requestCreateFoodorderToDjango"]),
+        ...mapActions("orderModule", ["requestCreateDrinkorderToDjango"]),
+        ...mapActions("orderModule", ["requestCreatePurchaseToDjango"]),
+        
+        updateQuantity(item) {
+            // 수량 업데이트 로직
+        },
+        removeItem(item) {
+            this.foodcartItems = this.foodcartItems.filter(foodcartItem => foodcartItem.foodcartItemId !== item.foodcartItemId);
+            this.drinkcartItems = this.drinkcartItems.filter(drinkcartItem => drinkcartItem.drinkcartItemId !== item.drinkcartItemId);
+            this.selectedFoodItems = this.selectedFoodItems.filter(selectedFoodItem => selectedFoodItem.foodcartItemId !== item.foodcartItemId);
+            this.selectedDrinkItems = this.selectedDrinkItems.filter(selectedDrinkItem => selectedDrinkItem.drinkcartItemId !== item.drinkcartItemId);
+        },
+        confirmCheckout() {
+            this.isCheckoutDialogVisible = true;
+        },
+        async proceedToOrder() {
+            this.isCheckoutDialogVisible = false;
+
+            console.log('foodcartItems:', this.foodcartItems);
+            console.log('selectedFoodItems:', this.selectedFoodItems);
+            console.log('drinkcartItems:', this.drinkcartItems);
+            console.log('selectedDrinkItems:', this.selectedDrinkItems);
+            // const response = await this.requestCreateOrderToDjango()
+
+            try {
+                const selectedFoodcartItems = this.foodcartItems.filter(item => this.selectedFoodItems.includes(item));
+                const foodorderItems = selectedFoodcartItems.map(item => ({
+                    foodcartItemId: item.foodcartItemId,
+                    foodorderPrice: item.foodPrice,
+                    foodquantity: item.foodquantity
+                }));
+                console.log("foodorderItems: ", foodorderItems)
+                const selectedDrinkcartItems = this.drinkcartItems.filter(item => this.selectedDrinkItems.includes(item));
+                const drinkorderItems = selectedDrinkcartItems.map(item => ({
+                    drinkcartItemId: item.drinkcartItemId,
+                    drinkorderPrice: item.drinkPrice,
+                    drinkquantity: item.drinkquantity
+                }));
+                console.log("drinkorderItems: ", drinkorderItems)
+                const foodorderId = await this.requestCreateFoodorderToDjango({ items: foodorderItems });
+                const drinkorderId = await this.requestCreateDrinkorderToDjango({ items: drinkorderItems });
+
+                const purchasePayload = {
+                        foodorderItems,
+                        drinkorderItems,
+                };
+                
+                console.log("purchasePayload:", purchasePayload)
+
+                const purchaseId = await this.requestCreatePurchaseToDjango({ 
+                    userToken: localStorage.getItem('userToken'),
+                    foodorderItems: purchasePayload.foodorderItems,
+                    drinkorderItems: purchasePayload.drinkorderItems
+                });
+                console.log("purchaseId: ", purchaseId)
+                
+
+                this.$router.push({ 
+                    name: 'OrderReadPage', 
+                    params: { purchaseId: purchaseId.toString() } 
+                });
+
+            } catch (error) {
+                console.error('Order creation failed:', error);
+            }
+
+            // this.$router.push({ name: 'OrderReadPage', params: { selectedItems: this.selectedItems } });
+        },
+        async fetchFoodcartList() {
+            try {
+                const response = await this.requestFoodcartListToDjango();
+                this.foodcartItems = response;
+            } catch (error) {
+                console.error("Error fetching foodcart list:", error);
+            }
+        },
+        async fetchDrinkcartList() {
+            try {
+                const response = await this.requestDrinkcartListToDjango();
+                this.drinkcartItems = response;
+            } catch (error) {
+                console.error("Error fetching drinkcart list:", error);
+            }
+        },
     },
-  },
-  methods: {
-    ...mapActions("cartModule", [
-      "requestCartListToDjango",
-      "requestRemoveCartItemToDjango",
-    ]),
-    ...mapActions("orderModule", ["requestCreateOrderToDjango"]),
-    getProductImage(productName) {
-      return require(`@/assets/images/uploadImages/${productName}.png`);
+    created() {
+        this.fetchFoodcartList();
+        this.fetchDrinkcartList();
     },
-    async removeItem(item) {
-      try {
-        await this.requestRemoveCartItemToDjango({ CartItemId: [item.cartItemId] });
-        this.cartItems = this.cartItems.filter(
-          (cartItem) => cartItem.cartItemId !== item.cartItemId
-        );
-      } catch (error) {
-        console.error("Cart Item 삭제 중 에러 발생", error);
-      }
-    },
-    goToRegister() {
-      this.$router.push({ name: "AccountRegisterPage" });
-    },
-    goToLogin() {
-      this.$router.push({ name: "AccountLoginPage" });
-    },
-    confirmCheckout() {
-      this.isCheckoutDialogVisible = true;
-    },
-    async proceedToOrder() {
-      this.isCheckoutDialogVisible = false;
-      try {
-        const orderItems = this.cartItems.map((item) => ({
-          cartItemId: item.cartItemId,
-          orderPrice: item.productPrice,
-          quantity: item.quantity,
-          size: item.productSize,
-        }));
-        const orderId = await this.requestCreateOrderToDjango({ items: orderItems });
-        this.$router.push({
-          name: "OrderReadPage",
-          params: { orderId: orderId.toString() },
-        });
-      } catch (error) {
-        console.error("Order creation failed:", error);
-      }
-    },
-    async fetchCartList() {
-      try {
-        const response = await this.requestCartListToDjango();
-        this.cartItems = response;
-      } catch (error) {
-        console.error("Error fetching cart list:", error);
-      }
-    },
-  },
-  created() {
-    this.fetchCartList();
-  },
 };
 </script>
+
+<style>
+/* 필요한 스타일을 여기에 추가합니다. */
+</style>

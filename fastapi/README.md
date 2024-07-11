@@ -1,2 +1,2 @@
-# EES-FastAPI-AI
-Eeeeeeeeeeeeeee 슈!
+# HZ-FastAPI-AI
+하나의 조

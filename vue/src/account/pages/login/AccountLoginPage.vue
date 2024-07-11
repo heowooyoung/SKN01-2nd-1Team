@@ -1,9 +1,18 @@
 <template>
     <v-container class="container">
+        <v-card flat class="logo-card">
+            <v-img
+                width="100%"
+                height="100%"
+                :src="require('@/assets/images/fixed/logo_waiting.png')"
+                @click="goToHome"
+            />
+        </v-card>
+
         <div class="login-wrapper">
             <div>
-                <div :style="{ marginBottom: login_flag ? '20px' : '10px', textAlign: 'center'}">
-                        LOGIN
+                <div :style="{ marginBottom: login_flag ? '32px' : '8px' }">
+                    로그인
                 </div>
 
                 <div v-if="login_flag == false" class="login-error-box">
@@ -11,7 +20,7 @@
                     <br />
                     비밀번호를 재설정하거나,
                     <br />
-                    카카오 간편로그인을  시도해 보세요.
+                    다시 시도해 보세요.
                 </div>
 
                 <v-responsive class="mx-auto" min-width="300">
@@ -34,7 +43,7 @@
                             bg-color="rgba(0, 0, 0, 0.6)"
                             :rules="[passwordRequired]"
                             :append-inner-icon="
-                                visible ? 'mdi-eye' : 'mdi-eye-off'
+                                visible ? 'mdi-eye-off' : 'mdi-eye'
                             "
                             :type="visible ? 'text' : 'password'"
                             @click:append-inner="visible = !visible"
@@ -42,28 +51,54 @@
 
                         <v-btn
                             width="100%"
-                            color="white"
+                            color="#f6c748"
+                            size="large"
+                            :disabled="!form"
                             :loading="loading"
                             type="submit"
                             variant="elevated"
                             block
-                            style="font-size: 13px;"
                         >
                             로그인
                         </v-btn>
                     </v-form>
                 </v-responsive>
-                <v-btn color="purple darken-2" class="black--text mt-2" block @click="goToNomalAccountRegisterPage" style="font-size: 13px;">
-                    <router-link :to="{ name: 'NomalAccountRegisterPage' }" class="custom-link">
-                            <span class="option-text"> 회원가입 </span>
-                    </router-link>
-                </v-btn>
 
-                <v-divider :thickness="3" style="margin-top: 20px; margin-bottom: 20px;"></v-divider>
-                
+                <v-divider :thickness="2" color="#fff"></v-divider>
 
-                <v-btn color="#FEE500" class="black--text mt-2 kakao-login-btn" block @click="goToKakaoLogin">
-                </v-btn>
+                <div>다른 방법으로 로그인하기</div>
+                <div>
+                    <div>
+                        <v-img
+                            src="@/assets/images/fixed/button_kakao_login.png"
+                            width="100%"
+                            height="100%"
+                            class="rounded-circle"
+                            @click="goToKakaoLogin"
+                        />
+                    </div>
+                    <div>
+                        <v-img
+                            src="@/assets/images/fixed/button_google_login.png"
+                            width="100%"
+                            height="100%"
+                            class="rounded-circle"
+                        />
+                    </div>
+                    <div>
+                        <v-img
+                            src="@/assets/images/fixed/button_naver_login.png"
+                            width="100%"
+                            height="100%"
+                            class="rounded-circle"
+                        />
+                    </div>
+                </div>
+
+                <div>
+                    <p>Waiting 회원이 아닌가요?</p>
+                    <p v-on:click="goToSignUp">이곳을 눌러 지금 가입하세요.</p>
+                </div>
             </div>
         </div>
     </v-container>
@@ -111,11 +146,13 @@ export default {
 
             this.loading = true;
 
+            // 회원정보 일치하는지 확인하는 작업 필요함
+            // 회원정보 일치하면
             setTimeout(
                 () => ((this.loading = false), (this.login_flag = true)),
                 2000
             );
-
+            // 회원정보 일치하지않으면
             setTimeout(
                 () => ((this.loading = false), (this.login_flag = false)),
                 2000
@@ -133,63 +170,56 @@ export default {
 };
 </script>
 
-
-
 <style scoped>
 .container {
-    margin: 0;
     width: 100%;
     max-width: 100vw;
     height: 100%;
     padding: 20px 40px 20px 40px;
     background: linear-gradient(
-            rgba(255, 255, 255, 0),
-            rgba(255, 255, 255, 0)
+            rgba(255, 255, 255, 0.4),
+            rgba(255, 255, 255, 0.4)
         ),
-        url("@/assets/images/fixed/login1.png");
+        url("@/assets/background_image/main_image.png");
     background-size: cover;
 }
 
+.logo-card {
+    width: 120px;
+    height: 60px;
+    display: inline-block;
+    background: transparent;
+
+    .v-img {
+        object-fit: fill;
+        cursor: pointer;
+    }
+}
 
 :deep(.v-img__img--contain) {
     object-fit: fill !important;
 }
 
 .login-wrapper {
-    position: relative;
-    z-index: 1;    
-    color: white;
-    min-width: 100px;
-    min-height: 500px;
-    padding: 20px;
-    padding-top: 10%;
-    border-top-width: 50px;    
-    border-radius: 20px;
+    height: calc(100% - 160px);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
-.login-wrapper > div {    
+.login-wrapper > div {
+    padding: 60px 80px;
     background-color: rgba(0, 0, 0, 0.6);
-    position: relative;
-    z-index: 1;    
-    color: white;
-    width:400px;
-    min-height: 500px;
-    padding: 20px;
-    border-top-width: 150px;    
-    border-radius: 20px;
-    margin: auto;
+    border-radius: 8px;
 }
-.custom-link {
-  color: white;
-  text-decoration: none;
-}
+
 .login-wrapper > div > div:first-child {
     color: #fff;
-    font-size: 25px;
+    font-size: 32px;
     font-weight: bold;
-    padding: 5px;
-    margin: auto;
 }
+
 .login-wrapper > div > .login-error-box {
     background-color: rgba(39, 54, 108, 1);
     padding: 16px;
@@ -197,12 +227,15 @@ export default {
     border-radius: 10px;
     color: #fff;
 }
+
 .login-wrapper > div > .v-divider {
     margin-top: 8px;
     margin-bottom: 8px;
 }
+
 .login-wrapper > div > div:nth-last-child(3) {
     font-size: 12px;
+    color: rgba(255, 255, 255, 0.6);
     margin-bottom: 8px;
 }
 
@@ -238,16 +271,6 @@ export default {
 
 .v-form .v-text-field {
     margin-bottom: 8px;
-}
-
-.kakao-login-btn {
-    background-image: url("@/assets/images/fixed/kakao_login.png");
-    background-size: contain;
-    background-repeat: no-repeat;
-    background-position: center;
-    display: flex;
-    align-items: center;
-    justify-content: center;
 }
 
 :deep(.v-label.v-field-label) {

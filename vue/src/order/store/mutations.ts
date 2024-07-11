@@ -1,31 +1,36 @@
 import { MutationTree } from "vuex";
-import { OrderState, OrderItem, Orders } from "./states";
-import {
-    REQUEST_ORDER_TO_DJANGO,
-    REQUEST_ORDER_LIST_TO_DJANGO,
-    SET_CURRENT_PAGE_NUMBER,
-    SET_TOTAL_PAGE_NUMBER
+import { OrderState, FoodorderItem, DrinkorderItem, PurchaseData } from "./states";
+import { 
+    REQUEST_FOODORDER_TO_DJANGO,
+    REQUEST_FOODORDER_LIST_TO_DJANGO,
+    REQUEST_DRINKORDER_TO_DJANGO,
+    REQUEST_DRINKORDER_LIST_TO_DJANGO,
+    SET_PURCHASE_DATA
 } from "./mutation-types";
 
 export interface OrderMutations extends MutationTree<OrderState> {
-    [REQUEST_ORDER_TO_DJANGO](state: OrderState, receivedData: OrderItem): void
-    [REQUEST_ORDER_LIST_TO_DJANGO](state: OrderState, receivedData: OrderItem[]): void
-    [SET_CURRENT_PAGE_NUMBER](state: OrderState, pageNumber: number): void
-    [SET_TOTAL_PAGE_NUMBER](state: OrderState, pageNumber: number): void
+    [REQUEST_FOODORDER_TO_DJANGO] (state: OrderState, receivedData: FoodorderItem): void
+    [REQUEST_FOODORDER_LIST_TO_DJANGO] (state: OrderState, receivedData: FoodorderItem[]): void
+    [REQUEST_DRINKORDER_TO_DJANGO] (state: OrderState, receivedData: DrinkorderItem): void
+    [REQUEST_DRINKORDER_LIST_TO_DJANGO] (state: OrderState, receivedData: DrinkorderItem[]): void
+    [SET_PURCHASE_DATA] (state: OrderState, receivedData: PurchaseData): void
 }
 
 const mutations: MutationTree<OrderState> = {
-    [REQUEST_ORDER_TO_DJANGO](state: OrderState, receivedData: OrderItem): void {
-        state.order = receivedData
+    [REQUEST_FOODORDER_TO_DJANGO] (state: OrderState, receivedData: FoodorderItem): void {
+        state.foodorder = receivedData
     },
-    [REQUEST_ORDER_LIST_TO_DJANGO](state: OrderState, receivedData: Orders[]): void {
-        state.orderList = receivedData
+    [REQUEST_FOODORDER_LIST_TO_DJANGO] (state: OrderState, receivedData: FoodorderItem[]): void {
+        state.foodorderList = receivedData
     },
-    [SET_CURRENT_PAGE_NUMBER](state: OrderState, pageNumber: number): void {
-        state.currentPageNumber = pageNumber
+    [REQUEST_DRINKORDER_TO_DJANGO] (state: OrderState, receivedData: DrinkorderItem): void {
+        state.drinkorder = receivedData
     },
-    [SET_TOTAL_PAGE_NUMBER](state: OrderState, pageNumber: number): void {
-        state.totalPageNumber = pageNumber
+    [REQUEST_DRINKORDER_LIST_TO_DJANGO] (state: OrderState, receivedData: DrinkorderItem[]): void {
+        state.drinkorderList = receivedData
+    },
+    [SET_PURCHASE_DATA] (state: OrderState, receivedData: PurchaseData): void { // 추가된 부분
+        state.purchaseData = receivedData
     }
 }
 
