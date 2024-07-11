@@ -1,12 +1,12 @@
 import actions, { CartActions } from "./actions"
-// import mutations, { CartMutations } from "./mutations"
+// import mutations, { FoodcartMutations } from "./mutations"
 import state, { CartState } from "./states"
 
 export interface CartModule {
     namespaced: true
     state: CartState
     actions: CartActions
-    // mutations: CartMutations
+    // mutations: FoodcartMutations
 }
 
 const cartModule: CartModule = {

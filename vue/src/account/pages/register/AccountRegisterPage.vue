@@ -1,211 +1,275 @@
 <template>
-    <v-container class="register-container" fill-height>
-        <v-row align="center" justify="center">
-            <v-col cols="12" md="8" lg="6">
-                <v-card>
-                    <v-card-title>
-                        <span class="headline">간편 신규 회원가입</span>
-                    </v-card-title>
-                    
-                    
-                    <v-responsive class="mx-auto" min-width="400">
-                        <v-form ref="form" v-model="formValid" lazy-validation>
-                            <v-text-field
-                                    v-model="email"
-                                    label="Email"
-                                    variant="solo"                                    
-                                    required
-                                    :rules="emailRules"
-                                    :disabled="true"/>
-                            
-                            <v-row align="center">
-                                <v-col cols="10">
-                                    <v-text-field
-                                            v-model="nickname"
-                                            label="Nickname"
-                                            required
-                                            :rules="nicknameRules"
-                                            :error-message="nicknameErrorMessages"/>
-                                </v-col>
-                                
-                                <v-col cols="2">
-                                    <v-btn
-                                        color="gb(200, 255, 0)"
-                                        style="color: black; width:90px"                                        
-                                        small
-                                        :disabled="
-                                            nickname == '' ||
-                                            isNicknameValid == true"
-                                        type="button"
-                                        @click="checkNicknameDuplication">
-                                        중복 검사
-                                    </v-btn>
-                                </v-col>
-                            </v-row>
-                            
-                            <div v-if="isNicknameValid" class="valid-nickname-box" style="color: chartreuse;">
-                                        사용 가능한 닉네임입니다.
-                            </div>
+    <v-container class="container">
+        <div class="register-wrapper">
+            <div>
+                <p>회원 가입</p>
 
-                            <div style="margin-top: 32px;">
-                                <v-radio-group
-                                    v-model="gender"
-                                    inline
-                                    label="성별"
-                                    color="black">
-                                    <v-radio
-                                        label="남성"
-                                        value="MALE"
-                                        color="cyan"
-                                        base-color="white"
-                                    ></v-radio>
-                                    <v-radio
-                                        label="여성"
-                                        value="FEMALE"
-                                        color="pink"
-                                        base-color="white"
-                                    ></v-radio>
-                                </v-radio-group>
-                            </div>
-
-                            
-
+                <v-responsive class="mx-auto" min-width="400">
+                    <v-form
+                        v-model="form"
+                        @submit.prevent="onSubmit"
+                        lazy-validation
+                    >
                         <v-text-field
-                                v-model="birthyear"
-                                label="출생년도" 
-                                :rules="birthyearRules"
-                                required            
-                        />                       
-                        
-                        </v-form>
-                    </v-responsive>    
-                    
+                            label="이메일 주소"
+                            variant="solo"
+                            v-model="email"
+                            color="#fff"
+                            bg-color="rgba(0, 0, 0, 0.6)"
+                            disabled
+                        />
 
-                    <v-card-actions>
-                        <v-spacer></v-spacer>
-                        <v-btn color="black" 
-                                @click="submitForm" 
-                                :disabled="!isValidForSubmission">
-                            회원가입 하기
+                        <div class="nickname-box">
+                            <v-text-field
+                                label="닉네임"
+                                variant="solo"
+                                v-model="nickname"
+                                :error-messages="nicknameErrorMessage"
+                                :disabled="isNicknameValid == true"
+                                color="#fff"
+                                bg-color="rgba(0, 0, 0, 0.6)"
+                            />
+                            <div class="button-box">
+                                <v-btn
+                                    color="#f6c748"
+                                    small
+                                    :disabled="
+                                        nickname == '' ||
+                                        isNicknameValid == true
+                                    "
+                                    type="button"
+                                    @click="checkNicknameDuplication"
+                                >
+                                    중복 검사
+                                </v-btn>
+                            </div>
+                        </div>
+                        <div v-if="isNicknameValid" class="valid-nickname-box">
+                            사용 가능한 닉네임입니다.
+                        </div>
+
+                        <v-radio-group
+                            v-model="gender"
+                            inline
+                            label="성별"
+                            color="#fff"
+                        >
+                            <v-radio
+                                label="남성"
+                                value="man"
+                                color="#fff"
+                                base-color="#fff"
+                            ></v-radio>
+                            <v-radio
+                                label="여성"
+                                value="woman"
+                                base-color="#fff"
+                            ></v-radio>
+                        </v-radio-group>
+
+                        <div class="age-box">
+                            <p>출생년도</p>
+                            <v-slider
+                                v-model="birthyear"
+                                min="1900"
+                                max="2024"
+                                :step="1"
+                                thumb-label="always"
+                                thumb-color="#f6c748"
+                                track-color="#fff"
+                                track-fill-color="#f6c748"
+                                thumb-size="16"
+                                track-size="8"
+                            ></v-slider>
+                        </div>
+
+                        <v-btn
+                            width="100%"
+                            color="#f6c748"
+                            size="large"
+                            :disabled="!isValidForSubmission"
+                            type="submit"
+                            variant="elevated"
+                            block
+                        >
+                            가입하기
                         </v-btn>
-                    </v-card-actions>
-                </v-card>
-            </v-col>
-        </v-row>
+                    </v-form>
+                </v-responsive>
+            </div>
+        </div>
     </v-container>
 </template>
 
 <script>
-import { mapActions } from 'vuex'
+import { mapActions } from "vuex";
 
-const authenticationModule = 'authenticationModule'
-const accountModule = 'accountModule'
+const authenticationModule = "authenticationModule";
+const accountModule = "accountModule";
 
 export default {
-    data () {
+    data() {
         return {
-            formValid: false,
-            email: '',
-            nickname: '',
-            emailRules: [
-                v => !!v || 'Email 은 필수입니다!',
-                v => /.+@.+\..+/.test(v) || '유효한 Email 주소를 입력하세요!'
-            ],
-            nicknameRules: [v => !!v || 'Nickname은 필수입니다!'],
-            // passwordRules: [v => !!v || 'Password는 필수입니다!'],
-            gender: "MALE",
-            birthyear: '',
+            form: false,
+            email: null,
+            nickname: null,
+            gender: "man",
+            birthyear: 2024,
             nicknameErrorMessage: [],
             isNicknameValid: false,
-            birthyearRules: [
-                v => !!v || '출생년도는 필수입니다!',
-                v => /^\d+$/.test(v) || '출생년도는 숫자여야 합니다!',
-                v => v.length === 4 || '출생년도는 4자리여야 합니다!',
-            ],
-        }
+        };
     },
-    async created () {
-        await this.requestUserInfo()
-    },
-    computed: {
-        isValidForSubmission () {
-            return this.formValid && this.isNicknameValid && this.age !== 0;
-        },
-    },
-    methods: {
-        ...mapActions(authenticationModule, ['requestUserInfoToDjango', 'requestAddRedisAccessTokenToDjango']),
-        ...mapActions(accountModule, ['requestNicknameDuplicationCheckToDjango', 'requestCreateNewAccountToDjango',]),
 
-        async requestUserInfo () {
+    async created() {
+        await this.requestUserInfo();
+    },
+
+    computed: {
+        isValidForSubmission() {
+            return this.form && this.isNicknameValid && this.age !== 0;
+        },
+    },
+
+    methods: {
+        ...mapActions(authenticationModule, [
+            "requestUserInfoToDjango",
+            "requestAddRedisAccessTokenToDjango",
+        ]),
+        ...mapActions(accountModule, [
+            "requestNicknameDuplicationCheckToDjango",
+            "requestCreateNewAccountToDjango",
+        ]),
+
+        async requestUserInfo() {
             try {
-                const userInfo = await this.requestUserInfoToDjango()
-                this.email = userInfo.kakao_account.email
+                const userInfo = await this.requestUserInfoToDjango();
+                this.email = userInfo.kakao_account.email;
             } catch (error) {
-                console.error('에러:', error)
-                alert('사용자 정보를 가져오는데 실패하였습니다!')
+                console.error("에러:", error);
+                alert("사용자 정보를 가져오는데 실패하였습니다!");
             }
         },
-        async checkNicknameDuplication () {
-            console.log('닉네임 중복 검사 누름')
+
+        async checkNicknameDuplication() {
             try {
-                const isDuplicate = await this.requestNicknameDuplicationCheckToDjango({
-                    newNickname: this.nickname.trim()
-                })
-                if (isDuplicate) {
-                    this.nicknameErrorMessages = ['이 nickname은 이미 사용중입니다!']
-                    this.isNicknameValid = false
-                } else {
-                    this.nicknameErrorMessages = []
-                    this.isNicknameValid = true
-                }
+                await this.requestNicknameDuplicationCheckToDjango({
+                    newNickname: this.nickname.trim(),
+                }).then((res) => {
+                    if (res.data.isDuplicate) {
+                        this.nicknameErrorMessage = [
+                            "이 nickname은 이미 사용중입니다!",
+                        ];
+                        this.isNicknameValid = false;
+                    } else {
+                        this.isNicknameValid = true;
+                    }
+                });
             } catch (error) {
-                alert('닉네임 중복 확인에 실패했습니다!')
-                this.isNicknameValid = false
+                alert("닉네임 중복 확인에 실패했습니다!");
+                this.isNicknameValid = false;
             }
         },
-        async submitForm () {
-            console.log('회원가입 하기 누름')
-            if (this.$refs.form.validate()) {
+
+        async onSubmit() {
+            if (this.form) {
                 const accountInfo = {
                     email: this.email,
                     nickname: this.nickname,
-                    // password: this.password,     // 비밀번호 추가
-                    gender: this.gender,            // 성별 추가
-                    birthyear: this.birthyear,      // 생년월일 추가
-                }
-                await this.requestCreateNewAccountToDjango(accountInfo)
-                console.log('전송한 데이터:', accountInfo)
+                    gender: this.gender,
+                    birthyear: this.birthyear,
+                };
+
+                await this.requestCreateNewAccountToDjango(accountInfo);
+                console.log("전송한 데이터:", accountInfo);
 
                 const accessToken = localStorage.getItem("accessToken");
-                const email = accountInfo.email
-                console.log('register submitForm email:', email)
-                await this.requestAddRedisAccessTokenToDjango({ email, accessToken })
-                this.$router.push('/')
+                const email = accountInfo.email;
+                console.log("register submitForm email:", email);
+                await this.requestAddRedisAccessTokenToDjango({
+                    email,
+                    accessToken,
+                });
+
+                this.$router.push("/movie/list");
             }
-        }
-    }
-}
+        },
+    },
+};
 </script>
 
-
-
 <style scoped>
-.v-card {
-    position: relative;
-    z-index: 1;
-    background-color: rgb(0, 0, 0);
-    color: white;
-    min-width: 400px;
-    min-height: 500px;
-    padding: 20px;
-    border-top-width: 50px;    
-    border-radius: 20px;
+.container {
+    width: 100%;
+    max-width: 100vw;
+    height: 100%;
+    background: linear-gradient(
+            rgba(255, 255, 255, 0.4),
+            rgba(255, 255, 255, 0.4)
+        ),
+        url("@/assets/background_image/main_image.png");
+    background-size: cover;
 }
-.v-btn {
-    position: relative;
-    padding: 8px 16px;
-    margin-right: 10px;
-    background-color: rgb(200, 255, 0);
+
+.register-wrapper {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.register-wrapper > div {
+    padding: 60px 80px;
+    background-color: rgba(0, 0, 0, 0.6);
+    border-radius: 8px;
+}
+
+.register-wrapper > div > p:first-child {
+    color: #fff;
+    font-size: 32px;
+    font-weight: bold;
+    margin-bottom: 40px;
+}
+
+.v-form > .v-text-field:first-child {
+    margin-bottom: 8px;
+}
+
+.nickname-box {
+    height: 100%;
+    display: flex;
+    margin-bottom: 2px;
+}
+
+.nickname-box .button-box {
+    display: flex;
+    align-items: center;
+    margin-bottom: 22px;
+    margin-left: 12px;
+}
+
+.valid-nickname-box {
+    font-size: 12px;
+    color: #f6c748;
+    margin-top: -14px;
+}
+
+.age-box > p:first-of-type {
+    color: #fff;
+    font-size: 16px;
+    margin-bottom: 32px;
+}
+
+:deep(.v-label.v-field-label) {
+    color: rgba(255, 255, 255, 0.8) !important;
+}
+
+:deep(.v-text-field input) {
+    color: #fff !important;
+}
+
+:deep(.v-text-field .v-input__details) {
+    padding-inline: unset !important;
 }
 
 :deep(.v-radio-group > .v-input__control > .v-label) {
@@ -225,8 +289,28 @@ export default {
     margin-top: 0px !important;
 }
 
-:deep(.v-messages__message) {
-    color: rgb(200, 255, 0)!important; 
-    font-size: 18px;
+:deep(.v-selection-control--inline .v-label) {
+    color: #fff !important;
+}
+
+:deep(.v-selection-control--density-default) {
+    --v-selection-control-size: null !important;
+}
+
+:deep(.v-selection-control__wrapper) {
+    margin-right: 12px !important;
+}
+
+:deep(.v-selection-control--inline) {
+    flex: auto !important;
+}
+
+:deep(.v-slider-thumb__label) {
+    background-color: #f6c748 !important;
+    color: #000 !important;
+}
+
+:deep(.v-slider.v-input--horizontal) {
+    margin-inline: 24px 24px;
 }
 </style>

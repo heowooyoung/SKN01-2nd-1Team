@@ -1,31 +1,53 @@
 export interface OrderState {
-    orderList: Orders[];
-    order: OrderItem | null
-    currentPageNumber: number
-    totalPageNumber: number
+    foodorderList: FoodorderItem[];
+    foodorder : FoodorderItem | null
+    drinkorderList: DrinkorderItem[];
+    drinkorder : DrinkorderItem | null
+    purchaseData: PurchaseData | null;
 }
 
-export interface Orders {
-    orderId: number
-    orderName: string
-    orderDate: string
-    orderSize: number
-    ordersItemTotalPrice: number
+export interface FoodorderItem {
+    foodorderId: number;
+    foodcartItemId: number;
+    quantity: number;
+    foodorderPrice: number;
 }
 
-export interface OrderItem {
-    orderId: number
-    cartItemId: number
-    quantity: number
-    price: number
-    size: number
+export interface DrinkorderItem {
+    drinkorderId: number;
+    drinkcartItemId: number;
+    quantity: number;
+    drinkorderPrice: number;
+}
+
+export interface PurchaseData {
+    purchase: {
+        id: number;
+        purchase_date: string;
+        account: {
+            id: number;
+            loginType: string;
+            roleType: string;
+        };
+    };
+    foodorder: {
+        id: number;
+        status: string;
+        created_date: string;
+    };
+    drinkorder: {
+        id: number;
+        status: string;
+        created_date: string;
+    };
 }
 
 const state: OrderState = {
-    orderList: [],
-    order: null,
-    currentPageNumber: 1,
-    totalPageNumber: 1,
+    foodorderList: [],
+    foodorder : null,
+    drinkorderList: [],
+    drinkorder : null,
+    purchaseData: null
 }
 
 export default state
