@@ -90,6 +90,8 @@ Board, analysis, fake_data, predict, tool
 # 9. 수행결과(테스트/시연 페이지)
 https://www.youtube.com/watch?v=Mcd3E41yM1c
 ![image](https://github.com/heowooyoung/SKN01-2nd-1Team/assets/120430842/e5a2acc0-fa21-4b5c-b000-ed942e4953ac)
+![image](https://github.com/user-attachments/assets/aaec43de-9f42-449f-9b0e-22ade5b9793b)
+![image](https://github.com/user-attachments/assets/9e57fa75-555c-4fb9-98de-39cdd4d09c1e)
 
 # 10. 한 줄 회고
 - "도메인 구조 결정과 데이터 관점에서 많은 고민이 필요했으며, 효과적인 분석 방법에 대한 경험 부족을 느꼈다.
