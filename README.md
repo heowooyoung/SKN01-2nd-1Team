@@ -13,12 +13,36 @@ SK 네트웍스 Family AI 캠프 과정 2차 단위 프로젝트
 ```
 
 # 1. 팀 소개
-- HZ
-- 정의헌: JUNGUIHEON
-- 최인헌: ih9511
-- 허우영: heowooyoung
-- 이재호: gigcot
-- 임영훈: yhoon3002
+<table align=center>
+  <tbody>
+    <tr>
+      <td align="center">
+        <div>
+          <img src="https://github.com/user-attachments/assets/4d97616d-34b6-4495-aa18-dc1bb2733d4a"width="100px;"height="100px;" alt=""/>
+          <a href="https://github.com/JUNGUIHEON"><div align=center>팀장 정의헌</div></a>
+        </div>
+      </td>
+      <td align="center">
+        <div>
+          <img src="https://github.com/user-attachments/assets/7712ae53-2ac4-4c1a-9357-73709de29243"width="100px;" alt=""/>
+          <a href="https://github.com/gigcot"><div align=center>이재호</div></a>
+        </div>
+      </td>
+      <td align="center">
+        <img src="https://github.com/user-attachments/assets/7cbbcc77-39de-4dc6-be12-a2879ce15a0b"width="100px;" alt=""/>
+        <a href="https://github.com/JUNGUIHEON"><div align=center>임영훈</div></a>
+      </td>
+      <td align="center">
+        <img src="https://github.com/user-attachments/assets/77eff59b-1c54-4d91-a49c-5f81cf28fb35"width="100px;" alt=""/>
+        <a href="https://github.com/JUNGUIHEON"><div align=center>최인헌</div></a>
+      </td>
+      <td align="center">
+        <img src="https://github.com/user-attachments/assets/c1ad2b33-3e67-4dcc-8240-ec3e3665ac61"width="100px;" alt=""/>
+        <a href="https://github.com/JUNGUIHEON"><div align=center>허우영</div></a>
+      </td>
+    </tr>
+  </tbody>
+</table>
 
 # 2. 프로젝트 개요
 - 프로젝트 명: Waiting
