@@ -58,12 +58,12 @@ SK 네트웍스 Family AI 캠프 과정 2차 단위 프로젝트
 
 ### :heavy_check_mark:가설 1: 고객의 가입 기간이 길수록 이탈 가능성이 낮다
 - **데이터 수집**: 고객 가입 기간과 이탈 여부 데이터 수집
-- **통계 분석**: 가입 기간과 이탈 여부 간의 상관 관계 분석 (Chi-square 테스트)
+- **통계 분석**: 가입 기간과 이탈 여부 간의 상관 관계 분석
 - **결과 해석**: 유의미한 상관 관계가 있는지 확인
 
 ### :heavy_check_mark:가설 2: 특정 상품을 자주 구매한 고객은 다른 유사한 상품도 구매할 가능성이 높다
 - **데이터 수집**: 고객의 상품 구매 이력 데이터 수집
-- **통계 분석**: 특정 상품과 유사한 다른 상품 구매 빈도 간의 상관 관계 분석 (피어슨 상관 계수)
+- **통계 분석**: 특정 상품과 유사한 다른 상품 구매 빈도 간의 상관 관계 분석
 - **결과 해석**: 유사한 상품 구매 패턴이 존재하는지 확인
 
 # 4. 수행결과(테스트/시연 영상)
@@ -175,9 +175,9 @@ subscriptions_df = preprocess_and_normalize(subscriptions_df)
 <div align=left>
   <img src="https://img.shields.io/badge/Vue.js-4FC08D?style=for-the-badge&logo=Vue.js&logoColor=white">
   <img src="https://img.shields.io/badge/Vuetify-1867C0?style=for-the-badge&logo=Vuetify&logoColor=white">
-  <img src="https://img.shields.io/badge/JavaScript-F7D1E?style=for-the-badge&logo=JavaScript&logoColor=white">
+  <img src="https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=JavaScript&logoColor=white">
   <img src="https://img.shields.io/badge/TypeScript-3178C6?style=for-the-badge&logo=TypeScript&logoColor=white">
-  <img src="https://img.shields.io/badge/D3.js-F9A3C?style=for-the-badge&logo=D3.js&logoColor=white">
+  <img src="https://img.shields.io/badge/D3.js-F9A03C?style=for-the-badge&logo=D3.js&logoColor=white">
   <img src="https://img.shields.io/badge/Axios-5A29E4?style=for-the-badge&logo=Axios&logoColor=white">
 </div>
 
