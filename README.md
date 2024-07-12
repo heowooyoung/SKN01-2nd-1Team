@@ -34,15 +34,15 @@ SK 네트웍스 Family AI 캠프 과정 2차 단위 프로젝트
       </td>
       <td align="center">
         <img src="https://github.com/user-attachments/assets/7cbbcc77-39de-4dc6-be12-a2879ce15a0b"width="100px;" alt=""/>
-        <a href="https://github.com/JUNGUIHEON"><div align=center>임영훈</div></a>
+        <a href="https://github.com/yhoon3002"><div align=center>임영훈</div></a>
       </td>
       <td align="center">
         <img src="https://github.com/user-attachments/assets/77eff59b-1c54-4d91-a49c-5f81cf28fb35"width="100px;" alt=""/>
-        <a href="https://github.com/JUNGUIHEON"><div align=center>최인헌</div></a>
+        <a href="https://github.com/ih9511"><div align=center>최인헌</div></a>
       </td>
       <td align="center">
         <img src="https://github.com/user-attachments/assets/c1ad2b33-3e67-4dcc-8240-ec3e3665ac61"width="100px;" alt=""/>
-        <a href="https://github.com/JUNGUIHEON"><div align=center>허우영</div></a>
+        <a href="https://github.com/heowooyoung"><div align=center>허우영</div></a>
       </td>
     </tr>
   </tbody>
