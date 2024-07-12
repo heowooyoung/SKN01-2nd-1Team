@@ -1,4 +1,8 @@
-# SKN01-2nd-1Team
+<div align="center">
+    <img src="https://capsule-render.vercel.app/api?type=waving&color=FF0000&height=240&text=SKN01-2nd-1Team&animation=&fontColor=ffffff&fontSize=90" />
+</div>
+
+# :bow_and_arrow:SKN01-2nd-1Team
 Vue + Django + FastAPI 기반 가입 고객 이탈 예측 및 구매 동향 예측
 
 SK 네트웍스 Family AI 캠프 과정 2차 단위 프로젝트
@@ -52,21 +56,119 @@ SK 네트웍스 Family AI 캠프 과정 2차 단위 프로젝트
 
 # 3. 가설과 가설 검정
 
-### 가설 1: 고객의 가입 기간이 길수록 이탈 가능성이 낮다
+### :heavy_check_mark:가설 1: 고객의 가입 기간이 길수록 이탈 가능성이 낮다
 - **데이터 수집**: 고객 가입 기간과 이탈 여부 데이터 수집
 - **통계 분석**: 가입 기간과 이탈 여부 간의 상관 관계 분석 (Chi-square 테스트)
 - **결과 해석**: 유의미한 상관 관계가 있는지 확인
 
-### 가설 2: 특정 상품을 자주 구매한 고객은 다른 유사한 상품도 구매할 가능성이 높다
+### :heavy_check_mark:가설 2: 특정 상품을 자주 구매한 고객은 다른 유사한 상품도 구매할 가능성이 높다
 - **데이터 수집**: 고객의 상품 구매 이력 데이터 수집
 - **통계 분석**: 특정 상품과 유사한 다른 상품 구매 빈도 간의 상관 관계 분석 (피어슨 상관 계수)
 - **결과 해석**: 유사한 상품 구매 패턴이 존재하는지 확인
 
-# 4. 수행결과(테스트/시연 페이지)
-https://www.youtube.com/watch?v=Mcd3E41yM1c
-![image](https://github.com/heowooyoung/SKN01-2nd-1Team/assets/120430842/e5a2acc0-fa21-4b5c-b000-ed942e4953ac)
-![image](https://github.com/user-attachments/assets/aaec43de-9f42-449f-9b0e-22ade5b9793b)
-![image](https://github.com/user-attachments/assets/9e57fa75-555c-4fb9-98de-39cdd4d09c1e)
+# 4. 수행결과(테스트/시연 영상)
+<div align=left><h2>:movie_camera:발표 영상</div>
+  <div align=center>
+    <img src="https://github.com/user-attachments/assets/dd04dd05-7f47-4001-936c-12c469b7d1e2">
+    <a href="https://www.youtube.com/watch?v=Mcd3E41yM1c"><div>영상 보러가기</div></a>
+  </div>
+
+## 분석을 위한 전처리 코드
+```c
+import pandas as pd
+from sklearn.preprocessing import LabelEncoder, StandardScaler
+
+# 데이터 로드
+members_df = pd.read_excel('./generated_members.xlsx')
+orders_df = pd.read_excel('./generated_orders.xlsx')
+returns_df = pd.read_excel('./generated_returns.xlsx')
+subscriptions_df = pd.read_excel('./generated_subscriptions.xlsx')
+
+
+# Label Encoding을 위한 함수
+def label_encode(df):
+    label_encoders = {}
+    for column in df.select_dtypes(include=['object']).columns:
+        le = LabelEncoder()
+        df[column] = le.fit_transform(df[column].astype(str))
+        label_encoders[column] = le
+    return df, label_encoders
+
+
+# 정규화를 위한 함수
+def normalize(df):
+    scaler = StandardScaler()
+    numeric_columns = df.select_dtypes(include=['number']).columns
+    df[numeric_columns] = scaler.fit_transform(df[numeric_columns])
+    return df
+
+
+# 데이터프레임별로 전처리 및 정규화 적용
+def preprocess_and_normalize(df):
+    df, label_encoders = label_encode(df)
+
+    # 시계열 데이터 처리 (필요에 따라 조정)
+    for column in df.select_dtypes(include=['datetime64', 'object']).columns:
+        try:
+            df[column] = pd.to_datetime(df[column])
+            df[column] = df[column].astype('int64') // 10 ** 9  # 타임스탬프로 변환 (초 단위)
+        except ValueError:
+            pass  # datetime 변환 불가한 열은 무시
+
+    # 클래스 데이터 (0, 1, 2 등)가 있다면 이를 숫자로 변환
+    if 'class' in df.columns:
+        df['class'] = df['class'].astype(int)
+
+    df = normalize(df)
+    return df
+
+
+# 각 데이터프레임에 대해 전처리 및 정규화 수행
+members_df = preprocess_and_normalize(members_df)
+orders_df = preprocess_and_normalize(orders_df)
+returns_df = preprocess_and_normalize(returns_df)
+subscriptions_df = preprocess_and_normalize(subscriptions_df)
+```
+
+## :receipt:구매 동향 분석
+<div align=center>
+  <img src="https://github.com/user-attachments/assets/60915955-b8ac-4993-9922-4e9bf03111b4">
+  <div align=center><b>Boxplot</b></div>
+</div>
+
+<br></br>
+
+<div align=center>
+  <img src="https://github.com/user-attachments/assets/95778f68-2cc9-4917-84d9-c1ae338caa30">
+  <div align=center><b>Correlation Matrix</b></div>
+</div>
+
+<br></br>
+
+<div align=center>
+  <img src="https://github.com/heowooyoung/SKN01-2nd-1Team/assets/120430842/e5a2acc0-fa21-4b5c-b000-ed942e4953ac">
+  <div align=center><b>Kmeans Clustering</b></div>
+</div>
+
+## :receipt:고객 이탈 분석
+<div align=center>
+  <img src="https://github.com/user-attachments/assets/7055d4ed-1686-481f-97cc-14b722da7fee">
+  <div align=center><b>Boxplot</b></div>
+</div>
+
+<br></br>
+
+<div align=center>
+  <img src="https://github.com/user-attachments/assets/c8539f9b-ec95-4c7b-9752-8161d51f7264">
+  <div align=center><b>Correlation Matrix</b></div>
+</div>
+
+<br></br>
+
+<div align=center>
+  <img src="https://github.com/user-attachments/assets/aaec43de-9f42-449f-9b0e-22ade5b9793b">
+  <div align=center><b>Visualization of Linear Regression Model</b></div>
+</div>
 
 # 5. 기술 스택
 <div align=left><h3>🕹️ Frontend</div>
