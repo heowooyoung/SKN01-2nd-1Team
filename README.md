@@ -24,7 +24,7 @@ SK 네트웍스 Family AI 캠프 과정 2차 단위 프로젝트
 - 프로젝트 명: Waiting
 - 프로젝트 소개: 모든 OTT의 독점 서비스를 Waiting에서 전부 사용 가능하다!
 - 프로젝트 필요성(배경): OTT 서비스를 한 눈에 볼 수 없어서 여러 서비스 사이트에서 구독을 해야 하는데 이걸 하나로 이용할 수 없을까 ? 에서 시작 되었습니다.
-- 프로젝트 목표: 웹 페이지 구현 및 데이터 분석
+- 프로젝트 목표: OTT 서비스 가입 고객들의 이탈률 예측 및 OTT 서비스 구현
 
 # 3. 기술 스택
 - Python, Django, SQLAlchemy, FastAPI, MYSQL, Docker, Redis, HTML5/CSS3, JavaScript, Vue3, Vuetify3, TensorFlow, Keras, axios, Graphviz, 
