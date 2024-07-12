@@ -26,10 +26,28 @@ SK 네트웍스 Family AI 캠프 과정 2차 단위 프로젝트
 - 프로젝트 필요성(배경): OTT 서비스를 한 눈에 볼 수 없어서 여러 서비스 사이트에서 구독을 해야 하는데 이걸 하나로 이용할 수 없을까 ? 에서 시작 되었습니다.
 - 프로젝트 목표: OTT 서비스 가입 고객들의 이탈률 예측 및 OTT 서비스 구현
 
-# 3. 기술 스택
+# 3. 가설과 가설 검정
+
+### 가설 1: 고객의 가입 기간이 길수록 이탈 가능성이 낮다
+- **데이터 수집**: 고객 가입 기간과 이탈 여부 데이터 수집
+- **통계 분석**: 가입 기간과 이탈 여부 간의 상관 관계 분석 (Chi-square 테스트)
+- **결과 해석**: 유의미한 상관 관계가 있는지 확인
+
+### 가설 2: 특정 상품을 자주 구매한 고객은 다른 유사한 상품도 구매할 가능성이 높다
+- **데이터 수집**: 고객의 상품 구매 이력 데이터 수집
+- **통계 분석**: 특정 상품과 유사한 다른 상품 구매 빈도 간의 상관 관계 분석 (피어슨 상관 계수)
+- **결과 해석**: 유사한 상품 구매 패턴이 존재하는지 확인
+
+# 4. 수행결과(테스트/시연 페이지)
+https://www.youtube.com/watch?v=Mcd3E41yM1c
+![image](https://github.com/heowooyoung/SKN01-2nd-1Team/assets/120430842/e5a2acc0-fa21-4b5c-b000-ed942e4953ac)
+![image](https://github.com/user-attachments/assets/aaec43de-9f42-449f-9b0e-22ade5b9793b)
+![image](https://github.com/user-attachments/assets/9e57fa75-555c-4fb9-98de-39cdd4d09c1e)
+
+# 5. 기술 스택
 - Python, Django, SQLAlchemy, FastAPI, MYSQL, Docker, Redis, HTML5/CSS3, JavaScript, Vue3, Vuetify3, TensorFlow, Keras, axios, Graphviz, 
 
-# 4. Agile Board (애자일 보드)
+# 6. Agile Board (애자일 보드)
 Vue-Front-end
 ![image](https://github.com/SKNETWORKS-FAMILY-AICAMP/SKN01-2nd-1Team/assets/120430842/476ca612-a9da-48d8-9051-0d88acb2bd5a)
 ![image](https://github.com/SKNETWORKS-FAMILY-AICAMP/SKN01-2nd-1Team/assets/120430842/6336d580-952e-4aa4-911c-5c288d1c4612)
@@ -42,7 +60,7 @@ FastAPI-AI
 ![image](https://github.com/SKNETWORKS-FAMILY-AICAMP/SKN01-2nd-1Team/assets/120430842/3e5feeb6-3cd1-40f1-bc0c-5514fdc059c5)
 ![image](https://github.com/SKNETWORKS-FAMILY-AICAMP/SKN01-2nd-1Team/assets/120430842/ab4c68b7-1b78-4907-84a8-20b0efe87b06)
 
-# 5. Commit History (커밋 이력)
+# 7. Commit History (커밋 이력)
 Vue-Front-end
 https://github.com/heowooyoung/HZ-Vue-Frontend/commits/main/
 
@@ -52,7 +70,7 @@ https://github.com/heowooyoung/HZ-Django-Backend/commits/main/
 FastAPI-AI
 https://github.com/heowooyoung/HZ-FastAPI-AI/commits/main/
 
-# 6. 발생한 이슈 내역  
+# 8. 발생한 이슈 내역  
 
 ## 우선 순위를 5 단계로 나눠서 관리  
 
@@ -72,12 +90,11 @@ https://github.com/heowooyoung/HZ-FastAPI-AI/commits/main/
 3. Team Project 자체 issue 작성 
 ![image](https://github.com/heowooyoung/SKN01-2nd-1Team/assets/120430842/62e14a59-9c3f-4f45-bab1-cf8fbb0c6815)
 
-이상입니다.
 
-# 7. ERD
+# 9. ERD
 ![image](https://github.com/SKNETWORKS-FAMILY-AICAMP/SKN01-2nd-1Team/assets/120430842/2868a2f3-009e-4afc-8d20-37c0f040e172)
 
-# 8. 주요 Domain 요소들
+# 10. 주요 Domain 요소들
 Vue-Front-end
 Home, Product, Subscription, Food, Drink, Movie, Admin, Order, Cart, Account
 
@@ -87,12 +104,8 @@ Account, Food, Movie, drink, Product, MovieAPI, Order, Subscribe, Authentication
 FastAPI-AI
 Board, analysis, fake_data, predict, tool
 
-# 9. 수행결과(테스트/시연 페이지)
-https://www.youtube.com/watch?v=Mcd3E41yM1c
-![image](https://github.com/heowooyoung/SKN01-2nd-1Team/assets/120430842/e5a2acc0-fa21-4b5c-b000-ed942e4953ac)
-![image](https://github.com/user-attachments/assets/aaec43de-9f42-449f-9b0e-22ade5b9793b)
-![image](https://github.com/user-attachments/assets/9e57fa75-555c-4fb9-98de-39cdd4d09c1e)
 
-# 10. 한 줄 회고
+
+# 11. 한 줄 회고
 - "도메인 구조 결정과 데이터 관점에서 많은 고민이 필요했으며, 효과적인 분석 방법에 대한 경험 부족을 느꼈다.
 - 뷰 문법과 Django API 통신에 대해 많이 배웠지만, 계획과 달리 뷰를 많이 다루게 되어 아쉬웠다. 앞으로는 더 체계적으로 진행하고, 마감기한에 맞춰 생산성을 높이는 방법을 고민해야겠다."
