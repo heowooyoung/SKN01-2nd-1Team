@@ -69,7 +69,7 @@ SK 네트웍스 Family AI 캠프 과정 2차 단위 프로젝트
 # 4. 수행결과(테스트/시연 영상)
 <div align=left><h2>:movie_camera:발표 영상</div>
   <div align=center>
-    <img src="https://github.com/user-attachments/assets/dd04dd05-7f47-4001-936c-12c469b7d1e2">
+    <img src="https://github.com/user-attachments/assets/dd04dd05-7f47-4001-936c-12c469b7d1e2"width="800px">
     <a href="https://www.youtube.com/watch?v=Mcd3E41yM1c"><div>영상 보러가기</div></a>
   </div>
 
@@ -132,41 +132,41 @@ subscriptions_df = preprocess_and_normalize(subscriptions_df)
 
 ## :receipt:구매 동향 분석
 <div align=center>
-  <img src="https://github.com/user-attachments/assets/60915955-b8ac-4993-9922-4e9bf03111b4">
+  <img src="https://github.com/user-attachments/assets/60915955-b8ac-4993-9922-4e9bf03111b4"width="800px">
   <div align=center><b>Boxplot</b></div>
 </div>
 
 <br></br>
 
 <div align=center>
-  <img src="https://github.com/user-attachments/assets/95778f68-2cc9-4917-84d9-c1ae338caa30">
+  <img src="https://github.com/user-attachments/assets/95778f68-2cc9-4917-84d9-c1ae338caa30"width="800px">
   <div align=center><b>Correlation Matrix</b></div>
 </div>
 
 <br></br>
 
 <div align=center>
-  <img src="https://github.com/heowooyoung/SKN01-2nd-1Team/assets/120430842/e5a2acc0-fa21-4b5c-b000-ed942e4953ac">
+  <img src="https://github.com/heowooyoung/SKN01-2nd-1Team/assets/120430842/e5a2acc0-fa21-4b5c-b000-ed942e4953ac"width="800px">
   <div align=center><b>Kmeans Clustering</b></div>
 </div>
 
 ## :receipt:고객 이탈 분석
 <div align=center>
-  <img src="https://github.com/user-attachments/assets/7055d4ed-1686-481f-97cc-14b722da7fee">
+  <img src="https://github.com/user-attachments/assets/7055d4ed-1686-481f-97cc-14b722da7fee"width="800px">
   <div align=center><b>Boxplot</b></div>
 </div>
 
 <br></br>
 
 <div align=center>
-  <img src="https://github.com/user-attachments/assets/c8539f9b-ec95-4c7b-9752-8161d51f7264">
+  <img src="https://github.com/user-attachments/assets/c8539f9b-ec95-4c7b-9752-8161d51f7264"width="800px">
   <div align=center><b>Correlation Matrix</b></div>
 </div>
 
 <br></br>
 
 <div align=center>
-  <img src="https://github.com/user-attachments/assets/aaec43de-9f42-449f-9b0e-22ade5b9793b">
+  <img src="https://github.com/user-attachments/assets/aaec43de-9f42-449f-9b0e-22ade5b9793b"width="800px">
   <div align=center><b>Visualization of Linear Regression Model</b></div>
 </div>
 
@@ -196,17 +196,23 @@ subscriptions_df = preprocess_and_normalize(subscriptions_df)
 </div>
 
 # 6. Agile Board (애자일 보드)
-Vue-Front-end
-![image](https://github.com/SKNETWORKS-FAMILY-AICAMP/SKN01-2nd-1Team/assets/120430842/476ca612-a9da-48d8-9051-0d88acb2bd5a)
-![image](https://github.com/SKNETWORKS-FAMILY-AICAMP/SKN01-2nd-1Team/assets/120430842/6336d580-952e-4aa4-911c-5c288d1c4612)
+<b>Vue-Front-end</b>
+<div align=left>
+  <img src="https://github.com/SKNETWORKS-FAMILY-AICAMP/SKN01-2nd-1Team/assets/120430842/476ca612-a9da-48d8-9051-0d88acb2bd5a"width="900px">
+  <img src="https://github.com/SKNETWORKS-FAMILY-AICAMP/SKN01-2nd-1Team/assets/120430842/6336d580-952e-4aa4-911c-5c288d1c4612"width="900px">
+</div>
 
-Django-Back-end
-![image](https://github.com/SKNETWORKS-FAMILY-AICAMP/SKN01-2nd-1Team/assets/120430842/de4faa18-2d31-4025-abb9-63aa289f0075)
-![image](https://github.com/SKNETWORKS-FAMILY-AICAMP/SKN01-2nd-1Team/assets/120430842/37de4bfc-846e-4864-838b-68bed2f1880c)
+<b>Django-Back-end</b>
+<div align=left>
+  <img src="https://github.com/SKNETWORKS-FAMILY-AICAMP/SKN01-2nd-1Team/assets/120430842/de4faa18-2d31-4025-abb9-63aa289f0075"width="900px">
+  <img src="https://github.com/SKNETWORKS-FAMILY-AICAMP/SKN01-2nd-1Team/assets/120430842/37de4bfc-846e-4864-838b-68bed2f1880c"width="900px">
+</div>
 
-FastAPI-AI
-![image](https://github.com/SKNETWORKS-FAMILY-AICAMP/SKN01-2nd-1Team/assets/120430842/3e5feeb6-3cd1-40f1-bc0c-5514fdc059c5)
-![image](https://github.com/SKNETWORKS-FAMILY-AICAMP/SKN01-2nd-1Team/assets/120430842/ab4c68b7-1b78-4907-84a8-20b0efe87b06)
+<b>FastAPI-AI</b>
+<div align=left>
+  <img src="https://github.com/SKNETWORKS-FAMILY-AICAMP/SKN01-2nd-1Team/assets/120430842/3e5feeb6-3cd1-40f1-bc0c-5514fdc059c5"width="900px">
+  <img src="https://github.com/SKNETWORKS-FAMILY-AICAMP/SKN01-2nd-1Team/assets/120430842/ab4c68b7-1b78-4907-84a8-20b0efe87b06"width="900px">
+</div>
 
 # 7. Commit History (커밋 이력)
 Vue-Front-end
@@ -222,38 +228,45 @@ https://github.com/heowooyoung/HZ-FastAPI-AI/commits/main/
 
 ## 우선 순위를 5 단계로 나눠서 관리  
 
-```c
-실제 서비스를 운영한다는 마인드로 현실 상황에서 발생하는 크고 작은 이슈들이 존재할 것입니다.
-이 서비스들에서 회사 입장에서 매출에 중요한 것과 중요하지 않은 것들이 있을 것입니다.
-이와 같은 사항들을 실질적으로 고려하여 이슈 관리를 진행합니다.
-```
-1. agile board 의 issue칸에 작성
-![image](https://github.com/heowooyoung/SKN01-2nd-1Team/assets/120430842/09a85108-65ab-4b52-81e4-442e0d4bfbcb)
+>
+실제 서비스를 운영한다는 마인드로 현실 상황에서 발생하는 크고 작은 이슈들이 존재합니다. 이 서비스들에 있어서 회사의 매출에 중요한 것과 중요하지 않은 요인들이 있을 것입니다. 이와 같은 사항들을 실질적으로 고려하여 이슈 관리를 진행합니다.
 
-2. 엔지니어링 위키에 issue 작성
-![image](https://github.com/heowooyoung/SKN01-2nd-1Team/assets/120430842/4d8c8c03-5af9-4ea9-9d7e-fc9912e4e511)
-![image](https://github.com/heowooyoung/SKN01-2nd-1Team/assets/120430842/e44e9749-44e8-4a40-90c9-fa1e0411da2a)
-![image](https://github.com/heowooyoung/SKN01-2nd-1Team/assets/120430842/55708875-8901-4e12-844d-cb942382378e)
+<b>1. Agile board에 issue 작성</b>
+<div align=left>
+    <img src="https://github.com/heowooyoung/SKN01-2nd-1Team/assets/120430842/09a85108-65ab-4b52-81e4-442e0d4bfbcb"width="900px">
+</div>
 
-3. Team Project 자체 issue 작성 
-![image](https://github.com/heowooyoung/SKN01-2nd-1Team/assets/120430842/62e14a59-9c3f-4f45-bab1-cf8fbb0c6815)
+<br></br>
 
+<b>2. 엔지니어링 위키에 issue 작성</b>
+<div align=left>
+    <img src="https://github.com/heowooyoung/SKN01-2nd-1Team/assets/120430842/4d8c8c03-5af9-4ea9-9d7e-fc9912e4e511"width="900px">
+    <img src="https://github.com/heowooyoung/SKN01-2nd-1Team/assets/120430842/e44e9749-44e8-4a40-90c9-fa1e0411da2a"width="900px">
+    <img src="https://github.com/heowooyoung/SKN01-2nd-1Team/assets/120430842/55708875-8901-4e12-844d-cb942382378e"width="900px">
+</div>
+
+<br></br>
+
+<b>3. Team Project 자체 issue 작성</b>
+<div align=left>
+    <img src="https://github.com/heowooyoung/SKN01-2nd-1Team/assets/120430842/62e14a59-9c3f-4f45-bab1-cf8fbb0c6815"width="900px">
+</div>
 
 # 9. ERD
 ![image](https://github.com/SKNETWORKS-FAMILY-AICAMP/SKN01-2nd-1Team/assets/120430842/2868a2f3-009e-4afc-8d20-37c0f040e172)
 
 # 10. 주요 Domain 요소들
-Vue-Front-end
+<div><b><i>Front-end</i></b></div>
 Home, Product, Subscription, Food, Drink, Movie, Admin, Order, Cart, Account
-
-Django-Back-end
+<br></br>
+<div><b><i>Django-Back-end</i></b></div>
 Account, Food, Movie, drink, Product, MovieAPI, Order, Subscribe, Authentication
-
-FastAPI-AI
+<br></br>
+<div><b><i>FastAPI-AI</i></b></div>
 Board, analysis, fake_data, predict, tool
 
 
 
 # 11. 한 줄 회고
-- "도메인 구조 결정과 데이터 관점에서 많은 고민이 필요했으며, 효과적인 분석 방법에 대한 경험 부족을 느꼈다.
-- 뷰 문법과 Django API 통신에 대해 많이 배웠지만, 계획과 달리 뷰를 많이 다루게 되어 아쉬웠다. 앞으로는 더 체계적으로 진행하고, 마감기한에 맞춰 생산성을 높이는 방법을 고민해야겠다."
+- 도메인 구조 결정과 데이터 관점에서 많은 고민이 필요했으며, 효과적인 분석 방법에 대한 경험 부족을 느꼈습니다.
+- 뷰 문법과 Django API 통신에 대해 많이 배웠지만, 계획과 달리 뷰를 많이 다루게 되어 아쉬웠습니다. 앞으로는 더 체계적으로 진행하고, 마감기한에 맞춰 생산성을 높이는 방법을 고민해야될 것 같습니다.
