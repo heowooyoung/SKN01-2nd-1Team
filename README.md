@@ -45,7 +45,29 @@ https://www.youtube.com/watch?v=Mcd3E41yM1c
 ![image](https://github.com/user-attachments/assets/9e57fa75-555c-4fb9-98de-39cdd4d09c1e)
 
 # 5. 기술 스택
-- Python, Django, SQLAlchemy, FastAPI, MYSQL, Docker, Redis, HTML5/CSS3, JavaScript, Vue3, Vuetify3, TensorFlow, Keras, axios, Graphviz, 
+<div align=left><h3>🕹️ Frontend</div>
+<div align=left>
+  <img src="https://img.shields.io/badge/Vue.js-4FC08D?style=for-the-badge&logo=Vue.js&logoColor=white">
+  <img src="https://img.shields.io/badge/Vuetify-1867C0?style=for-the-badge&logo=Vuetify&logoColor=white">
+  <img src="https://img.shields.io/badge/JavaScript-F7D1E?style=for-the-badge&logo=JavaScript&logoColor=white">
+  <img src="https://img.shields.io/badge/TypeScript-3178C6?style=for-the-badge&logo=TypeScript&logoColor=white">
+  <img src="https://img.shields.io/badge/D3.js-F9A3C?style=for-the-badge&logo=D3.js&logoColor=white">
+  <img src="https://img.shields.io/badge/Axios-5A29E4?style=for-the-badge&logo=Axios&logoColor=white">
+</div>
+
+<div align=left><h3>🕹️ Backend</div>
+<div aling=left>
+  <img src="https://img.shields.io/badge/Django-092E20?style=for-the-badge&logo=Django&logoColor=white">
+  <img src="https://img.shields.io/badge/MySQL-4479A1?style=for-the-badge&logo=MySQL&logoColor=white">
+  <img src="https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=Docker&logoColor=white">
+</div>
+
+<div align=left><h3>🕹️ AI Core</div>
+<div align=left>
+  <img src="https://img.shields.io/badge/FastAPI-009688?style=for-the-badge&logo=FastAPI&logoColor=white">
+  <img src="https://img.shields.io/badge/TensorFlow-FF6F00?style=for-the-badge&logo=TensorFlow&logoColor=white">
+  <img src="https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=Python&logoColor=white">
+</div>
 
 # 6. Agile Board (애자일 보드)
 Vue-Front-end
